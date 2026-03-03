@@ -24,8 +24,8 @@ exports.getUsersById=(req,res)=>{
 //Create a new user
 //CRUD - Create
 exports.createUser=(req,res)=>{
-    const {fname,lname,email,gender,ip_address,course}=req.body;
-    connection.query('INSERT INTO userdata (first_name, last_name, email, gender, ip_address, course) VALUES (?,?,?,?,?,?)',[fname,lname,email,gender,ip_address, course],(err,result)=>{
+    const {fname,lname,email,gender}=req.body;
+    connection.query('INSERT INTO userdata (first_name, last_name, email, gender) VALUES (?,?,?,?)',[fname,lname,email,gender],(err,result)=>{
         if(err) throw err;
             res.json({message: 'User created succesfully', userId:result.insertId});
     });
@@ -34,10 +34,10 @@ exports.createUser=(req,res)=>{
 //Update a user
 //CRUD - Update
 exports.updateUser = (req, res) => {
-  const { id,fname,lname,email,gender,course } = req.body;
+  const { id,fname,lname,email,gender,course} = req.body;
   connection.query(
     "UPDATE userdata SET first_name=?, last_name=?, email=?, gender=?, course=? WHERE id=?",
-    [fname, lname,email,gender,course,id],
+    [fname,lname,email,gender,course,id],
     (err, result) => {
       if (err) throw err;
       if (result.affectedRows > 0) {
