@@ -11,6 +11,15 @@ const routes = require('./routes');
 
 //Utilization of Express
 const app = express();
+
+//Moment
+const moment = require('moment');
+const logger = (req, res, next) => {
+    console.log(`${req.protocol}://${req.get('host')}${req.originalURL} - ${moment().format()}`)
+    next();
+}
+
+app.use(logger);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));//this will allow us to read the URL body tags
